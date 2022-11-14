@@ -16,6 +16,14 @@
     width: 100%;
 }
 
+.field--error {
+    border-color: var(--color-danger);
+}
+
+.field__error, .field--error {
+    color: var(--color-danger);
+}
+
 .field, .field:focus {
     border-top: 0;
     border-left: 0;
@@ -33,26 +41,15 @@
     border-bottom: 2px solid var(--primary-color);
 }
 
-.button--line {
-    width: 50%;
-}
-
 .form__inner-wrapper {
     display: flex;
     justify-content: center;
     padding: 20px 0;
 }
 
-.form__inner-wrapper--fields {
+.form__inner-wrapper--col {
     flex-direction: column;
     align-items: center;
-}
-
-.button {
-    background-color: var(--form-background);
-    padding: 10px 20px;
-    border: 2px solid black;
-
 }
 
 .field:hover, .button:hover {
@@ -63,15 +60,6 @@
 
 .field:focus, .field:hover {
     scale: var(--field-scale);
-}
-
-.button:focus, .button:hover {
-    scale: var(--button-scale);
-}
-
-
-.button--active {
-    background-color: red;
 }
 
 .password--true {

@@ -6,9 +6,13 @@
   --auth-title-size: 48px;
 
   --primary-color: #DC703A;
+  --primary-color-hovered: #c3551e;
   
   --field-scale: 1.1;
   --button-scale: 1.2;
+
+  --color-danger: red;
+  --color-success: green;
 }
 
 .App {
@@ -27,7 +31,34 @@
   height: 500px;
   animation-name: planet;
   animation-iteration-count: infinite;
-  animation-duration: 15s;
+  animation-duration: 30s;
+}
+
+.link {
+  color: var(--primary-color);
+}
+
+.link:hover {
+  cursor: pointer;
+  color: var(--primary-color-hovered);
+}
+
+.button {
+  background-color: transparent;
+  padding: 10px 20px;
+  border: 2px solid black;
+  text-transform: uppercase;
+  margin: 10px 0;
+}
+
+.button:focus, .button:hover {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+  scale: var(--button-scale);
+}
+
+.button--half {
+  width: 50%;
 }
 
 @keyframes planet {

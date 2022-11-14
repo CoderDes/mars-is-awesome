@@ -1,24 +1,31 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 
 import { ERRORS, KEYBOARD_KEYS, ROUTES } from '../../constants';
+import { AuthSchema } from '../../Schema/validate';
 import { isStringHtml, obscureString } from '../../services/stringService';
+import { login, register } from '../../services/authService';
+import { AuthContext } from '../../context/auth';
+
 import './styles.css';
 
 
-export default function AuthForm({isLogin, submitHandler}) {
+export default function AuthForm({isLoginForm, toggleLoginForm}) {
     const [passwordTrueVal, setPasswordTrueVal] = useState('');
-    const [passwordDisplayVal, setPasswordDisplayVal] = useState('');
+    const [passwordFakeVal, setPasswordFakeVal] = useState('');
     const [isShift, setShift] = useState(false);
+
+    const authCtx = useContext(AuthContext)
     const navigate = useNavigate();
 
     const initValues = {
         username: '',
-        passwordDisplay: '',
+        passwordFake: '',
         passwordTrue: '',
     };
-    const validator = ({username, password}) => {
+
+    const validator = ({username, passwordFake}) => {
         const errors = {};
         if (!username) { 
             errors.username = ERRORS.required;
@@ -26,23 +33,39 @@ export default function AuthForm({isLogin, submitHandler}) {
         else if (isStringHtml(username)) {
             errors.username = ERRORS.stringHtml;
         }
-        else if (!password) {
-            errors.password = ERRORS.required;
+        else if (!passwordFake) {
+            errors.passwordFake = ERRORS.required;
         }
-        else if (isStringHtml(password)) {
-            errors.password = ERRORS.stringHtml;
+        else if (isStringHtml(passwordFake)) {
+            errors.passwordFake = ERRORS.stringHtml;
         }
     }
-    const handleSubmit = (values, {setSubmitting}) => {
-        
+
+    const handleSubmit = async (values) => {
+        console.log("VALUES", values)
+        if (isLoginForm) {
+            const result = await login(values);
+            if (result.success) {
+                authCtx.isAuthorized = true;
+                console.log(authCtx);
+                navigate(ROUTES.root);
+            }
+            return;
+        }
+        const result = await register(values);
+        if (result.success) {
+            navigate(ROUTES.registrationSuccess);
+            return;
+        }
+        navigate(ROUTES.registrationFailed);
     }
 
     const handlePass = (e) => {
         if (!e) {
-            console.error(ERRORS.unknownBehaviour)
+            console.error(ERRORS.unknownBehaviour);
         }
         else if (e.key === KEYBOARD_KEYS.backspace) {
-            setPasswordTrueVal(passwordTrueVal.slice(0, passwordTrueVal.length - 1))
+            setPasswordTrueVal(passwordTrueVal.slice(0, passwordTrueVal.length - 1));
         }
         else if (e.key === KEYBOARD_KEYS.shift) {
             setShift(true);
@@ -54,40 +77,75 @@ export default function AuthForm({isLogin, submitHandler}) {
         }
     };
 
+    const changeForm = (resetFormCallback) => {
+        toggleLoginForm(!isLoginForm);
+        resetFormCallback();
+        navigate(isLoginForm ? ROUTES.registration : ROUTES.login);
+    }
 
     useEffect(() => {
-        setPasswordDisplayVal(obscureString(`${passwordTrueVal}`)); 
+        setPasswordFakeVal(obscureString(`${passwordTrueVal}`)); 
     }, [passwordTrueVal]);
 
     return ( 
         <Formik 
             initialValues={initValues}
+            validationSchema={AuthSchema}
             validate={validator}
             onSubmit={handleSubmit}
         >
             {
-              (formProps) => (
+              ({errors, validateForm, resetForm}) => (
                 <Form className="form">
-                    <div className="form__inner-wrapper form__inner-wrapper--fields">
+                    <div className="form__inner-wrapper form__inner-wrapper--col">
                         <Field
-                            className="field"
+                            className={errors.username ? "field field--error" : "field"}
                             tabIndex="1"
-                            type="text" name="username" placeholder="username" 
+                            type="text" name="username" placeholder="Username"
+                            validate={validator}
                         />
+                        {
+                            errors.username ?
+                            <div className="field__error">
+                                {errors.username}
+                            </div>
+                            : null
+                        }
                         <Field type="passowrd" name="password" value={passwordTrueVal} style={{display: 'none'}}/>
                         <Field
                             className="field"
                             type="text" 
-                            name="fakePassword"
+                            name="passwordFake"
                             tabIndex="2"
-                            placeholder="password"
+                            placeholder="Password"
                             onKeyDown={handlePass}
-                            value={passwordDisplayVal}
+                            value={passwordFakeVal}
+                            validate={validator}
                         />
+                        {
+                            errors.passwordFake ?
+                            <div className="field__error">
+                                {errors.passwordFake}
+                            </div>
+                            : null
+                        }
                     </div>
-                    <div className="form__inner-wrapper">
-                        <button tabIndex="3" className={`button button--line ${isLogin ? 'button--active' : ''}`} onClick={() => navigate(ROUTES.root)}>Login</button>
-                        <button tabIndex="4" className="button button--line" onClick={() => navigate(ROUTES.registration)}>Register</button>
+                    <div className="form__inner-wrapper form__inner-wrapper--col">
+                        <button
+                            type="button"
+                            tabIndex="3" 
+                            className={`button button--half ${isLoginForm ? 'button--active' : ''}`} 
+                            onClick={handleSubmit}>
+                                {isLoginForm ? 'Login' : 'Register'}
+                        </button>
+                        <button
+                            type="button"
+                            tabIndex="4"
+                            className={`button button--half`}
+                            onClick={() => changeForm(resetForm)}
+                        >
+                            {`Go to ${isLoginForm ? 'registration' : 'login' } page`}
+                        </button>
                     </div>
                 </Form>
               ) 
