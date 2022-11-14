@@ -1,0 +1,43 @@
+:root {
+  --primary-background: #222E50;
+  --form-background: #DBDEE3;
+
+  --primary-title-color: #FFFFFF;
+  --auth-title-size: 48px;
+
+  --primary-color: #DC703A;
+  
+  --field-scale: 1.1;
+  --button-scale: 1.2;
+}
+
+.App {
+  width: 100%;
+  height: 100%;
+  background-color: var(--primary-background);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.Mars {
+  display: block;
+  width: 500px;
+  height: 500px;
+  animation-name: planet;
+  animation-iteration-count: infinite;
+  animation-duration: 15s;
+}
+
+@keyframes planet {
+  0% {
+    transform: translate(0px, 50px);
+  }
+  50% {
+    transform: translate(0px, -50px);
+  }
+  100% {
+    transform: translate(0px, 50px);
+  }
+}

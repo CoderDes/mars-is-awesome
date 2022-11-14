@@ -1,0 +1,12 @@
+.title {
+    color: var(--primary-title-color);
+    font-size: var(--auth-title-size);
+    padding: 20px 0px;
+    font-weight: bold;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
