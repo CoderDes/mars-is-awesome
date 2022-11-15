@@ -2,8 +2,6 @@
   --primary-background: #222E50;
   --form-background: #DBDEE3;
 
-  --primary-title-color: #FFFFFF;
-
   --primary-color: #DC703A;
   --primary-color-hovered: #c3551e;
 
@@ -78,7 +76,7 @@
 }
 
 .title {
-  color: var(--primary-title-color);
+  color: var(--alien-color);
   font-size: var(--auth-title-size);
   padding: 20px 0px;
   font-weight: bold;

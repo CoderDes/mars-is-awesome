@@ -5,3 +5,7 @@ export const login = async (data) => {
 export const register = async (data) => {
     return { success: true };
 }
+
+export const logout = async (data) => {
+    return { success: true };
+}
