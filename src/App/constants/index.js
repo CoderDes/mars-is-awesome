@@ -37,11 +37,6 @@ export const LOADER = {
 
 export const ALIEN = '👾';
 
-export const DATABASE_CONFIG = {
-    name: 'MarsDB',
-    version: 3,
-}
-
-export const DATABASE_COLLECTIONS = {
-    users: 'users',
-}
+export const MAIN_PAGE_TEXT = `На Марсе классно — красные пески, крутые горы и кратеры\n
+Безумно красивые каналы рядом с экватором\n
+Ничто не сравнится с тамошними закатами...`;

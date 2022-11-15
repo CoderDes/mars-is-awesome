@@ -1,10 +1,12 @@
 import { useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import Printer from '../../../components/Printer';
+
 import { AuthContext } from '../../../context/auth';
 import { logout } from '../../../services/authService';
 
-import { ROUTES } from '../../../constants'; 
+import { ROUTES, MAIN_PAGE_TEXT } from '../../../constants'; 
 
 import './styles.css';
 
@@ -26,11 +28,12 @@ export default function Root() {
         }
     }
 
-
     return (
         <main className="main">
             <div className="main__content">
-                <p className="text main__text">На Марсе классно...</p>
+                <p className="text main__text">
+                    <Printer text={MAIN_PAGE_TEXT}/>
+                </p>
                 <button className="button" onClick={handleLogout}>Logout</button>
             </div>
         </main>
