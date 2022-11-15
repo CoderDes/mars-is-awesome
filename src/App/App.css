@@ -3,16 +3,20 @@
   --form-background: #DBDEE3;
 
   --primary-title-color: #FFFFFF;
-  --auth-title-size: 48px;
 
   --primary-color: #DC703A;
   --primary-color-hovered: #c3551e;
+
+  --alien-color: purple;
   
   --field-scale: 1.1;
   --button-scale: 1.2;
 
   --color-danger: red;
   --color-success: green;
+
+  --auth-title-size: 48px;
+  --primary-text-size: 24px;
 }
 
 .App {
@@ -32,6 +36,9 @@
   animation-name: planet;
   animation-iteration-count: infinite;
   animation-duration: 30s;
+  position: absolute;
+  left: 20%;
+  top: 50px;
 }
 
 .link {
@@ -59,6 +66,35 @@
 
 .button--half {
   width: 50%;
+}
+
+.front-block {
+  position: relative;
+  z-index: 100;
+  background-color: var(--form-background);
+  padding: 100px;
+  border: 10px double black;
+  width: 100%;
+}
+
+.title {
+  color: var(--primary-title-color);
+  font-size: var(--auth-title-size);
+  padding: 20px 0px;
+  font-weight: bold;
+}
+
+.title--mars {
+  color: var(--primary-color);
+}
+
+.title--alien {
+  color: var(--alien-color);
+}
+
+.text {
+  color: var(--primary-color);
+  font-size: var(--primary-text-size);
 }
 
 @keyframes planet {

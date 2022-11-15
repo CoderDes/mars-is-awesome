@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { RouterProvider } from 'react-router-dom';
 
 import Router from './Router';
@@ -9,13 +9,14 @@ import './App.css';
 
 
 function App() {
-  const [isAuth, setAuth] = useState(false);
-  const ctx = useContext(AuthContext);
+  const [isAuthorized, setAuth] = useState(false);
 
   return (
     <div className="App">
-      { !isAuth ? <img src={Mars} alt="Mars" className="Mars" /> : null }
-      <RouterProvider router={Router} />
+      { !isAuthorized ? <img src={Mars} alt="Mars" className="Mars" /> : null }
+      <AuthContext.Provider value={{isAuthorized, setAuth}}>
+        <RouterProvider router={Router} />
+      </AuthContext.Provider>
     </div>
   );
 }

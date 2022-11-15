@@ -3,6 +3,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import Root from './routes/Root';
 import ErrorPage from './routes/Error';
 import Auth from './routes/Authorization';
+import RegisterSuccess from './routes/Authorization/RegisterSuccess';
 
 import { ROUTES } from '../constants';
 
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
     },
     {
         path: ROUTES.registrationSuccess,
-        element: <div>SUCCESS REGISTERED</div>
+        element: <RegisterSuccess />
     },
     {
         path: ROUTES.registrationFailed,

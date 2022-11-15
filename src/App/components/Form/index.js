@@ -16,7 +16,7 @@ export default function AuthForm({isLoginForm, toggleLoginForm}) {
     const [passwordFakeVal, setPasswordFakeVal] = useState('');
     const [isShift, setShift] = useState(false);
 
-    const authCtx = useContext(AuthContext)
+    const authCtx = useContext(AuthContext);
     const navigate = useNavigate();
 
     const initValues = {
@@ -42,11 +42,10 @@ export default function AuthForm({isLoginForm, toggleLoginForm}) {
     }
 
     const handleSubmit = async (values) => {
-        console.log("VALUES", values)
         if (isLoginForm) {
             const result = await login(values);
             if (result.success) {
-                authCtx.isAuthorized = true;
+                authCtx.setAuth(true);
                 console.log(authCtx);
                 navigate(ROUTES.root);
             }
@@ -134,14 +133,14 @@ export default function AuthForm({isLoginForm, toggleLoginForm}) {
                         <button
                             type="button"
                             tabIndex="3" 
-                            className={`button button--half ${isLoginForm ? 'button--active' : ''}`} 
+                            className="button button--half" 
                             onClick={handleSubmit}>
                                 {isLoginForm ? 'Login' : 'Register'}
                         </button>
                         <button
                             type="button"
                             tabIndex="4"
-                            className={`button button--half`}
+                            className="button button--half"
                             onClick={() => changeForm(resetForm)}
                         >
                             {`Go to ${isLoginForm ? 'registration' : 'login' } page`}

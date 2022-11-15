@@ -1,12 +1,7 @@
 .form {
-    background-color: var(--form-background);
     display: flex;
     flex-direction: column;
-    padding: 100px;
-    border: 10px double black;
     width: 100%;
-    position: relative;
-    z-index: 100;
 }
 
 .field {
@@ -44,7 +39,7 @@
 .form__inner-wrapper {
     display: flex;
     justify-content: center;
-    padding: 20px 0;
+    padding: 20px 0 0 0;
 }
 
 .form__inner-wrapper--col {
