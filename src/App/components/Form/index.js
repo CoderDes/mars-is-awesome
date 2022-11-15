@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 
 import { ERRORS, KEYBOARD_KEYS, ROUTES } from '../../constants';
-import { AuthSchema } from '../../Schema/validate';
-import { isStringHtml, obscureString } from '../../services/stringService';
+import { obscureString } from '../../services/stringService';
 import { login, register } from '../../services/authService';
+import { validateUsernameServ, validatePasswordServ } from '../../services/validateService';
 import { AuthContext } from '../../context/auth';
 
 import './styles.css';
@@ -21,25 +21,19 @@ export default function AuthForm({isLoginForm, toggleLoginForm}) {
 
     const initValues = {
         username: '',
-        passwordFake: '',
-        passwordTrue: '',
+        passwordFake: passwordFakeVal,
+        passwordTrue: passwordTrueVal,
     };
 
-    const validator = ({username, passwordFake}) => {
-        const errors = {};
-        if (!username) { 
-            errors.username = ERRORS.required;
-        }
-        else if (isStringHtml(username)) {
-            errors.username = ERRORS.stringHtml;
-        }
-        else if (!passwordFake) {
-            errors.passwordFake = ERRORS.required;
-        }
-        else if (isStringHtml(passwordFake)) {
-            errors.passwordFake = ERRORS.stringHtml;
+    const validateUsername = (val) => {
+        if (typeof val === 'string') {
+            return validateUsernameServ(val);
         }
     }
+
+    const validatePassword = () => {
+        return validatePasswordServ(passwordTrueVal);
+    };
 
     const handleSubmit = async (values) => {
         if (isLoginForm) {
@@ -89,19 +83,18 @@ export default function AuthForm({isLoginForm, toggleLoginForm}) {
     return ( 
         <Formik 
             initialValues={initValues}
-            validationSchema={AuthSchema}
-            validate={validator}
+            validate={validateUsername}
             onSubmit={handleSubmit}
         >
             {
-              ({errors, validateForm, resetForm}) => (
+              ({values, errors, resetForm}) => (
                 <Form className="form">
                     <div className="form__inner-wrapper form__inner-wrapper--col">
                         <Field
                             className={errors.username ? "field field--error" : "field"}
                             tabIndex="1"
                             type="text" name="username" placeholder="Username"
-                            validate={validator}
+                            validate={validateUsername}
                         />
                         {
                             errors.username ?
@@ -110,7 +103,6 @@ export default function AuthForm({isLoginForm, toggleLoginForm}) {
                             </div>
                             : null
                         }
-                        <Field type="passowrd" name="password" value={passwordTrueVal} style={{display: 'none'}}/>
                         <Field
                             className="field"
                             type="text" 
@@ -119,7 +111,7 @@ export default function AuthForm({isLoginForm, toggleLoginForm}) {
                             placeholder="Password"
                             onKeyDown={handlePass}
                             value={passwordFakeVal}
-                            validate={validator}
+                            validate={validatePassword}
                         />
                         {
                             errors.passwordFake ?

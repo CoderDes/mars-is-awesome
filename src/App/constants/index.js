@@ -20,13 +20,18 @@ export const ROUTES = {
 }
 
 export const AUTH = {
-    usernameMinLength: 3,
-    usernameMaxLength: 100,
-    passwordMinLength: 6,
-    passwordMaxLength: 100,
+    minLen: 3,
+    maxLen: 100,
 }
 
 export const PAGE_TITLES = {
     login: 'Login',
     register: 'Register',
 }
+
+export const LOADER = {
+    len: 3,
+    intervalMs: 500,
+};
+
+export const ALIEN = '👾';

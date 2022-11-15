@@ -70,9 +70,7 @@
   position: relative;
   z-index: 100;
   background-color: var(--form-background);
-  padding: 100px;
   border: 10px double black;
-  width: 100%;
 }
 
 .title {

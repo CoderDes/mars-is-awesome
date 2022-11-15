@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Loader from '../../../components/Loader';
-import { ROUTES } from '../../../constants/index';
+import { ROUTES, LOADER } from '../../../constants/index';
 
 export default function RegisterSuccess() {
-    const [counter, setCounter] = useState(3);
+    const [counter, setCounter] = useState(LOADER.len);
     const navigate = useNavigate();
     
 

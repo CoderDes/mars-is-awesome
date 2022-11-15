@@ -1,20 +1,19 @@
 import { useEffect, useState } from 'react';
 
 import { createObscuredStrOfLen } from '../services/stringService'; 
+import { LOADER } from '../constants';
 
 export default function Loader() {
-    const LOADER_LEN = 3;
-    const INTERVAL_MS = 500;
-    const [counter, setCounter] = useState(LOADER_LEN);
+    const [counter, setCounter] = useState(LOADER.len);
 
     useEffect(() => {
-        let loaderCounter = LOADER_LEN;
+        let loaderCounter = LOADER.len;
         let intervalId = setInterval(() => {
             if (loaderCounter === 0) {
-                loaderCounter = LOADER_LEN;
+                loaderCounter = LOADER.len;
             }
             setCounter(--loaderCounter);
-        }, INTERVAL_MS);
+        }, LOADER.intervalMs);
 
         return () => {
             clearInterval(intervalId);

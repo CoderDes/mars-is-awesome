@@ -1,0 +1,15 @@
+.error-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    padding: 0;
+}
+
+.error-page__error {
+    font-size: 30px;
+}
+
+.error-page__text {
+    margin: 10px 0;
+}
