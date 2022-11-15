@@ -1,8 +1,11 @@
-export const login = async (data) => {
-    return { success: true };
+export const login = (data) => {
+    const password = localStorage.getItem(data.username);
+    const success = (password && password === data.password);
+    return { success };
 }
 
-export const register = async (data) => {
+export const register = (data) => {
+    localStorage.setItem(data.username, data.password)
     return { success: true };
 }
 

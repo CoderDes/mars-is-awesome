@@ -4,6 +4,7 @@ export const ERRORS = {
     unknownBehaviour: 'something went wrong',
     shortInput: 'too short',
     longInput: 'too long',
+    failedLogin: 'username or password not correct',
 }
 
 export const KEYBOARD_KEYS = {
@@ -35,3 +36,12 @@ export const LOADER = {
 };
 
 export const ALIEN = '👾';
+
+export const DATABASE_CONFIG = {
+    name: 'MarsDB',
+    version: 3,
+}
+
+export const DATABASE_COLLECTIONS = {
+    users: 'users',
+}

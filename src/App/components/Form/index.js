@@ -22,7 +22,6 @@ export default function AuthForm({isLoginForm, toggleLoginForm}) {
     const initValues = {
         username: '',
         passwordFake: passwordFakeVal,
-        passwordTrue: passwordTrueVal,
     };
 
     const validateUsername = (val) => {
@@ -35,17 +34,23 @@ export default function AuthForm({isLoginForm, toggleLoginForm}) {
         return validatePasswordServ(passwordTrueVal);
     };
 
-    const handleSubmit = async (values) => {
+    const handleSubmit = (data, {setErrors, resetForm}) => {
+        const userData = {username: data.username, password: passwordTrueVal};
         if (isLoginForm) {
-            const result = await login(values);
+            const result = login(userData);
+            console.log("RESULT", result)
             if (result.success) {
                 authCtx.setAuth(true);
-                console.log(authCtx);
                 navigate(ROUTES.root);
+                return;
             }
+            console.log("LOL")
+            setErrors({
+                login: ERRORS.failedLogin,
+            });
             return;
         }
-        const result = await register(values);
+        const result = register(userData);
         if (result.success) {
             navigate(ROUTES.registrationSuccess);
             return;
@@ -72,6 +77,8 @@ export default function AuthForm({isLoginForm, toggleLoginForm}) {
 
     const changeForm = (resetFormCallback) => {
         toggleLoginForm(!isLoginForm);
+        setPasswordFakeVal('');
+        setPasswordTrueVal('');
         resetFormCallback();
         navigate(isLoginForm ? ROUTES.registration : ROUTES.login);
     }
@@ -87,7 +94,7 @@ export default function AuthForm({isLoginForm, toggleLoginForm}) {
             onSubmit={handleSubmit}
         >
             {
-              ({values, errors, resetForm}) => (
+              ({errors, resetForm}) => (
                 <Form className="form">
                     <div className="form__inner-wrapper form__inner-wrapper--col">
                         <Field
@@ -120,13 +127,19 @@ export default function AuthForm({isLoginForm, toggleLoginForm}) {
                             </div>
                             : null
                         }
+                        {
+                            errors.login ?
+                            <div className="field__error">
+                                {errors.login}
+                            </div>
+                            : null
+                        }
                     </div>
                     <div className="form__inner-wrapper form__inner-wrapper--col">
                         <button
-                            type="button"
                             tabIndex="3" 
                             className="button button--half" 
-                            onClick={handleSubmit}>
+                            type="submit">
                                 {isLoginForm ? 'Login' : 'Register'}
                         </button>
                         <button
