@@ -29,8 +29,10 @@ export default function Root() {
 
     return (
         <main className="main">
-            <p className="text main__text">На Марсе классно...</p>
-            <button className="button" onClick={handleLogout}>Logout</button>
+            <div className="main__content">
+                <p className="text main__text">На Марсе классно...</p>
+                <button className="button" onClick={handleLogout}>Logout</button>
+            </div>
         </main>
     );
 }

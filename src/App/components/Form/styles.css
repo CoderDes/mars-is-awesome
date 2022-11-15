@@ -50,8 +50,11 @@
 
 .field:hover, .button:hover {
     cursor: pointer;
-    background-color: var(--form-background);
     color: var(--primary-color);
+}
+
+.field:hover {
+    background-color: var(--form-background);
 }
 
 .field:focus, .field:hover {

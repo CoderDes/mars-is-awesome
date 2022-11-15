@@ -5,4 +5,16 @@
     background-size: cover;
     position: relative;
     z-index: 100;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+
+.main__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-top: 100px;
+    width: 80%;
 }
