@@ -5,8 +5,13 @@ export const login = (data) => {
 }
 
 export const register = (data) => {
-    localStorage.setItem(data.username, data.password)
-    return { success: true };
+    try {
+        localStorage.setItem(data.username, data.password);
+        return {success: true};
+    }
+    catch (err) {
+        return {success: false};
+    }
 }
 
 export const logout = async (data) => {

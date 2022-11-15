@@ -38,13 +38,11 @@ export default function AuthForm({isLoginForm, toggleLoginForm}) {
         const userData = {username: data.username, password: passwordTrueVal};
         if (isLoginForm) {
             const result = login(userData);
-            console.log("RESULT", result)
             if (result.success) {
                 authCtx.setAuth(true);
                 navigate(ROUTES.root);
                 return;
             }
-            console.log("LOL")
             setErrors({
                 login: ERRORS.failedLogin,
             });
