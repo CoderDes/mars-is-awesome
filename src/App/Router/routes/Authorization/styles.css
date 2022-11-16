@@ -6,6 +6,9 @@
     padding: 100px;
 }
 
-.registration-success {
-    max-width: 50%;
+
+@media screen and (max-width: 1500px) {
+    .auth-wrapper {
+        max-width: 50%;
+    }
 }

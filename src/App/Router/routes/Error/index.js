@@ -10,7 +10,7 @@ export default function ErrorPage() {
     const location = useLocation();
 
     return (
-        <article className="front-block error-page">
+        <article className="front-block front-block--half auth-wrapper error-page">
             <h1 className="title title--alien">Unexpected error occured</h1>
             <p className="error-page__error error-page__text">
                 <i>{(error && (error.statusText || error.message)) || ERRORS.unknownBehaviour}</i>

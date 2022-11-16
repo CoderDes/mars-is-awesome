@@ -6,7 +6,7 @@ export default function RegisterSuccess() {
 
 
     return (
-        <article className="front-block auth-wrapper registration-success">
+        <article className="front-block front-block--half auth-wrapper">
             <h1 className="title title--alien">
                 You are forgot your password. I'm so sorry.
             </h1>

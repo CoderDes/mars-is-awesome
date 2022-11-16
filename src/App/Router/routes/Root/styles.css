@@ -15,7 +15,6 @@
 .main__content {
     display: flex;
     align-items: center;
-    justify-content: space-around;
     padding-top: 100px;
     width: 80%;
 }
@@ -28,4 +27,28 @@
 
 .main__text {
     width: 60%;
+}
+
+@media screen and (max-width: 800px){
+    .main__content {
+        flex-direction: column;
+    }
+
+    .main__text {
+        width: 100%;
+        padding-bottom: 30px;
+    }
+
+    .main__button {
+        position: relative;
+        top: 0px;
+        right: 0px;
+        max-width: 30%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .main__button {
+        max-width: 80%;
+    }
 }

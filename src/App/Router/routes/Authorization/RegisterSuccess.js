@@ -27,7 +27,7 @@ export default function RegisterSuccess() {
 
 
     return (
-        <article className="front-block auth-wrapper registration-success">
+        <article className="front-block front-block--half auth-wrapper">
             <h1 className="title title--alien">
                 Registration succeed
             </h1>
