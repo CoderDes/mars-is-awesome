@@ -56,7 +56,7 @@
   margin: 10px 0;
 }
 
-.button:focus, .button:hover {
+.button:hover {
   color: var(--primary-color);
   border-color: var(--primary-color);
   scale: var(--button-scale);
@@ -71,6 +71,10 @@
   z-index: 100;
   background-color: var(--form-background);
   border: 10px double black;
+}
+
+.front-block--half {
+  max-width: 50%;
 }
 
 .title {
@@ -102,5 +106,33 @@
   }
   100% {
     transform: translate(0px, 50px);
+  }
+}
+
+
+@media screen and (max-width: 800px) {
+  :root {
+    --auth-title-size: 32px;
+  }
+  .App {
+    overflow: hidden;
+  }
+
+  .title {
+    text-align: center;
+  }
+
+  .front-block {
+    max-width: 70%;
+  }
+
+  .button {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 400px){
+  .front-block {
+    width: 100%;
   }
 }
