@@ -148,6 +148,16 @@ export default function AuthForm({isLoginForm, toggleLoginForm}) {
                         >
                             {`Go to ${isLoginForm ? 'registration' : 'login' } page`}
                         </button>
+                        {
+                            isLoginForm ?
+                            <button 
+                                className="button button--half"
+                                onClick={() => navigate(ROUTES.forgotPassword)}
+                            >
+                                Forgot Password
+                            </button> :
+                            null
+                        }
                     </div>
                 </Form>
               ) 

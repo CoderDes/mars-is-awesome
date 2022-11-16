@@ -17,6 +17,7 @@ export const ROUTES = {
     registration: '/registration',
     registrationSuccess: '/registration-success',
     registrationFailed: '/registration-fail',
+    forgotPassword: '/forgot-password',
     root: '/',
 }
 

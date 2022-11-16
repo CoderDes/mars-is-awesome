@@ -34,7 +34,7 @@ export default function Root() {
                 <p className="text main__text">
                     <Printer text={MAIN_PAGE_TEXT}/>
                 </p>
-                <button className="button" onClick={handleLogout}>Logout</button>
+                <button className="button main__button" onClick={handleLogout}>Logout</button>
             </div>
         </main>
     );
